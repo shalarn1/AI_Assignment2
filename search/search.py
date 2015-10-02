@@ -98,7 +98,7 @@ def depthFirstSearch(problem):
                 if problem.isGoalState(coord):
                     return curr_dir + [direction]
                 path_stack.push((coord, curr_dir + [direction], nodes_visited + [curr_state] ))
-
+    return []
 
     
     util.raiseNotDefined()
@@ -116,7 +116,34 @@ def breadthFirstSearch(problem):
                 if problem.isGoalState(coord):
                     return curr_dir + [direction]
                 path_queue.push((coord, curr_dir + [direction], nodes_visited + [curr_state] ))
+    return []
     util.raiseNotDefined()
+
+def iterativeDeepeningSearch(problem):
+    path_stack = util.Stack()
+    depth = 0
+    while True:
+        result = dls(problem, problem.getStartState(), path_stack, 0, depth)
+        if result != []:
+            return result
+        else:
+            path_stack = util.Stack()
+            path_stack.push((problem.getStartState(), [], []))
+            depth += 1
+
+def dls(problem, startState, stack, depth, max_depth):
+    while depth <= max_depth:
+        stack.push((problem.getStartState(), [], []))
+        while not stack.isEmpty():
+            curr_state, curr_dir, nodes_visited = stack.pop()
+
+            for coord, direction, cost in problem.getSuccessors(curr_state):
+                if not coord in nodes_visited:
+                    if problem.isGoalState(coord):
+                        return curr_dir + [direction]
+                    depth += 1
+                    stack.push((coord, curr_dir + [direction], nodes_visited + [curr_state] ))
+    return []
 
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""
