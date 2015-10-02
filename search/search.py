@@ -85,13 +85,37 @@ def depthFirstSearch(problem):
     print "Start:", problem.getStartState()
     print "Is the start a goal?", problem.isGoalState(problem.getStartState())
     print "Start's successors:", problem.getSuccessors(problem.getStartState())
+    [((4,5), "South", 1), (3,5)]
     """
     "*** YOUR CODE HERE ***"
+    path_stack = util.Stack()
+    path_stack.push((problem.getStartState(), [], []))
+    while not path_stack.isEmpty():
+        curr_state, curr_dir, nodes_visited = path_stack.pop()
+
+        for coord, direction, cost in problem.getSuccessors(curr_state):
+            if not coord in nodes_visited:
+                if problem.isGoalState(coord):
+                    return curr_dir + [direction]
+                path_stack.push((coord, curr_dir + [direction], nodes_visited + [curr_state] ))
+
+
+    
     util.raiseNotDefined()
 
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
     "*** YOUR CODE HERE ***"
+    path_queue = util.Queue()
+    path_queue.push((problem.getStartState(), [], []))
+    while not path_queue.isEmpty():
+        curr_state, curr_dir, nodes_visited = path_queue.pop()
+
+        for coord, direction, cost in problem.getSuccessors(curr_state):
+            if not coord in nodes_visited:
+                if problem.isGoalState(coord):
+                    return curr_dir + [direction]
+                path_queue.push((coord, curr_dir + [direction], nodes_visited + [curr_state] ))
     util.raiseNotDefined()
 
 def uniformCostSearch(problem):
@@ -117,3 +141,4 @@ bfs = breadthFirstSearch
 dfs = depthFirstSearch
 astar = aStarSearch
 ucs = uniformCostSearch
+ids = iterativeDeepeningSearch
