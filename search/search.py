@@ -94,7 +94,7 @@ def depthFirstSearch(problem):
         curr_state, curr_dir, nodes_visited = path_stack.pop()
 
         for coord, direction, cost in problem.getSuccessors(curr_state):
-            if not coord in nodes_visited:
+            if coord not in nodes_visited:
                 if problem.isGoalState(coord):
                     return curr_dir + [direction]
                 path_stack.push((coord, curr_dir + [direction], nodes_visited + [curr_state] ))
