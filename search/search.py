@@ -18,6 +18,9 @@ Pacman agents (in searchAgents.py).
 """
 
 import util
+import node
+import sys
+import searchAgents
 
 class SearchProblem:
     """
@@ -86,40 +89,78 @@ def depthFirstSearch(problem):
     print "Is the start a goal?", problem.isGoalState(problem.getStartState())
     print "Start's successors:", problem.getSuccessors(problem.getStartState())
     [((4,5), "South", 1), (3,5)]
-    """
+
     "*** YOUR CODE HERE ***"
+        """
     path_stack = util.Stack()
-    path_stack.push((problem.getStartState(), [], []))
-    while not path_stack.isEmpty():
-        curr_state, curr_dir, nodes_visited = path_stack.pop()
+    path_stack.push((problem.getStartState(), None, [], 0))
+    visited = []
+    while True:
+        if path_stack.isEmpty(): return sys.exit('Failure: no solution')
+        curr_state, curr_parent, curr_dir, curr_cost = path_stack.pop()
+        visited.append(curr_state)
 
         for coord, direction, cost in problem.getSuccessors(curr_state):
-            if coord not in nodes_visited:
+            if coord not in visited and coord not in path_stack:
                 if problem.isGoalState(coord):
                     return curr_dir + [direction]
-                path_stack.push((coord, curr_dir + [direction], nodes_visited + [curr_state] ))
+                path_stack.push((coord, curr_state, curr_dir + [direction], curr_cost + cost))
     return []
-
-    
     util.raiseNotDefined()
 
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
     "*** YOUR CODE HERE ***"
-    path_queue = util.Queue()
-    path_queue.push((problem.getStartState(), [], []))
-    while not path_queue.isEmpty():
-        curr_state, curr_dir, nodes_visited = path_queue.pop()
+    """
+    path_stack = util.Queue()
+    path_stack.push((problem.getStartState(), None, [], 0))
+    visited = []
+    while True:
+        if path_stack.isEmpty(): return sys.exit('Failure: no solution')
+        curr_state, curr_parent, curr_dir, curr_cost = path_stack.pop()
+        visited.append(curr_state)
 
         for coord, direction, cost in problem.getSuccessors(curr_state):
-            if not coord in nodes_visited:
+            if coord not in visited and coord not in path_stack:
                 if problem.isGoalState(coord):
                     return curr_dir + [direction]
-                path_queue.push((coord, curr_dir + [direction], nodes_visited + [curr_state] ))
-    return []
+                path_stack.push((coord, curr_state, curr_dir + [direction], curr_cost + cost))
+    return [] """
     util.raiseNotDefined()
 
 def iterativeDeepeningSearch(problem):
+    limit = 0
+    
+    while True:
+        result = depthLimitedSearch(problem,limit)
+        if result != "end": return result
+        limit +=1
+
+    return []
+    util.raiseNotDefined()
+
+def depthLimitedSearch(problem,limit=1000):
+  
+    path_queue = util.Stack()
+    path_queue.push((problem.getStartState(), None, [], 0))
+    visited = []
+    end = False
+    
+    while True:
+        if path_queue.isEmpty(): return "end"          
+        curr_state, curr_parent, curr_dir, curr_cost = path_queue.pop()
+        visited.append(curr_state)
+        if curr_cost == limit: end = True
+        else:
+            for state, action, cost in problem.getSuccessors(curr_state):
+                #ns = node.Node(state, n, action, n.pathcost+cost)         
+                if state not in visited and state not in path_queue: 
+                    if problem.isGoalState(state): 
+                        return curr_dir + [action]
+                    path_queue.push((state, curr_state, curr_dir + [action], curr_cost + cost))
+
+
+"""
     path_stack = util.Stack()
     depth = 0
     while True:
@@ -143,7 +184,7 @@ def dls(problem, startState, stack, depth, max_depth):
                         return curr_dir + [direction]
                     depth += 1
                     stack.push((coord, curr_dir + [direction], nodes_visited + [curr_state] ))
-    return []
+    return [] """
 
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""

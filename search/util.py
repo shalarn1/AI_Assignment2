@@ -122,6 +122,13 @@ class Stack:
     def __init__(self):
         self.list = []
 
+    """def __init__(self,item):
+        self.list = [] 
+        self.list.append(item) """
+
+    def __iter__(self):
+        return list.__iter__(self.list)
+
     def push(self,item):
         "Push 'item' onto the stack"
         self.list.append(item)
@@ -138,6 +145,13 @@ class Queue:
     "A container with a first-in-first-out (FIFO) queuing policy."
     def __init__(self):
         self.list = []
+
+    def __init__(self,item):
+        self.list = [] 
+        self.list.append(item)
+
+    def __iter__(self):
+        return list.__iter__(self.list)
 
     def push(self,item):
         "Enqueue the 'item' into the queue"
