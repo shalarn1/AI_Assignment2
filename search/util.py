@@ -146,10 +146,6 @@ class Queue:
     def __init__(self):
         self.list = []
 
-    def __init__(self,item):
-        self.list = [] 
-        self.list.append(item)
-
     def __iter__(self):
         return list.__iter__(self.list)
 

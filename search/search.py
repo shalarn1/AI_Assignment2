@@ -98,35 +98,33 @@ def depthFirstSearch(problem):
     while True:
         if path_stack.isEmpty(): return sys.exit('Failure: no solution')
         curr_state, curr_parent, curr_dir, curr_cost = path_stack.pop()
-        visited.append(curr_state)
+        if curr_state not in visited:
+            visited.append(curr_state)
 
-        for coord, direction, cost in problem.getSuccessors(curr_state):
-            if coord not in visited and coord not in path_stack:
-                if problem.isGoalState(coord):
-                    return curr_dir + [direction]
-                path_stack.push((coord, curr_state, curr_dir + [direction], curr_cost + cost))
+            for coord, direction, cost in problem.getSuccessors(curr_state):
+                if coord not in visited and coord not in path_stack:
+                    if problem.isGoalState(coord):
+                        return curr_dir + [direction]
+                    path_stack.push((coord, curr_state, curr_dir + [direction], curr_cost + cost))
     return []
-    util.raiseNotDefined()
 
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
     "*** YOUR CODE HERE ***"
-    """
     path_stack = util.Queue()
     path_stack.push((problem.getStartState(), None, [], 0))
     visited = []
     while True:
         if path_stack.isEmpty(): return sys.exit('Failure: no solution')
         curr_state, curr_parent, curr_dir, curr_cost = path_stack.pop()
-        visited.append(curr_state)
-
-        for coord, direction, cost in problem.getSuccessors(curr_state):
-            if coord not in visited and coord not in path_stack:
-                if problem.isGoalState(coord):
-                    return curr_dir + [direction]
-                path_stack.push((coord, curr_state, curr_dir + [direction], curr_cost + cost))
-    return [] """
-    util.raiseNotDefined()
+        if curr_state not in visited:
+            visited.append(curr_state)
+            for coord, direction, cost in problem.getSuccessors(curr_state):
+                if coord not in visited:
+                    if problem.isGoalState(coord):
+                        return curr_dir + [direction]
+                    path_stack.push((coord, curr_state, curr_dir + [direction], curr_cost + cost))
+    return []
 
 def iterativeDeepeningSearch(problem):
     limit = 0
@@ -136,11 +134,7 @@ def iterativeDeepeningSearch(problem):
         if result != "end": return result
         limit +=1
 
-    return []
-    util.raiseNotDefined()
-
 def depthLimitedSearch(problem,limit=1000):
-  
     path_queue = util.Stack()
     path_queue.push((problem.getStartState(), None, [], 0))
     visited = []
@@ -149,42 +143,15 @@ def depthLimitedSearch(problem,limit=1000):
     while True:
         if path_queue.isEmpty(): return "end"          
         curr_state, curr_parent, curr_dir, curr_cost = path_queue.pop()
-        visited.append(curr_state)
-        if curr_cost == limit: end = True
-        else:
-            for state, action, cost in problem.getSuccessors(curr_state):
-                #ns = node.Node(state, n, action, n.pathcost+cost)         
-                if state not in visited and state not in path_queue: 
-                    if problem.isGoalState(state): 
-                        return curr_dir + [action]
-                    path_queue.push((state, curr_state, curr_dir + [action], curr_cost + cost))
-
-
-"""
-    path_stack = util.Stack()
-    depth = 0
-    while True:
-        result = dls(problem, problem.getStartState(), path_stack, 0, depth)
-        if result != []:
-            return result
-        else:
-            path_stack = util.Stack()
-            path_stack.push((problem.getStartState(), [], []))
-            depth += 1
-
-def dls(problem, startState, stack, depth, max_depth):
-    while depth <= max_depth:
-        stack.push((problem.getStartState(), [], []))
-        while not stack.isEmpty():
-            curr_state, curr_dir, nodes_visited = stack.pop()
-
-            for coord, direction, cost in problem.getSuccessors(curr_state):
-                if not coord in nodes_visited:
-                    if problem.isGoalState(coord):
-                        return curr_dir + [direction]
-                    depth += 1
-                    stack.push((coord, curr_dir + [direction], nodes_visited + [curr_state] ))
-    return [] """
+        if curr_state not in visited:
+            visited.append(curr_state)
+            if curr_cost == limit: end = True
+            else:
+                for state, action, cost in problem.getSuccessors(curr_state):         
+                    if state not in visited: 
+                        if problem.isGoalState(state): 
+                            return curr_dir + [action]
+                        path_queue.push((state, curr_state, curr_dir + [action], curr_cost + cost))
 
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""
@@ -198,10 +165,41 @@ def nullHeuristic(state, problem=None):
     """
     return 0
 
-def aStarSearch(problem, heuristic=nullHeuristic):
-    """Search the node that has the lowest combined cost and heuristic first."""
+def manhattanHeuristic(state, problem):
+    """
+    A heuristic function estimates the cost from the current state to the nearest
+    goal in the provided SearchProblem. Using the manhattan distance betwen this 2 points
+    """
+    return searchAgents.manhattanHeuristic(state, problem)
+
+def aStarSearch(problem, heuristic=manhattanHeuristic):
+    """Search the node that has the lowest combined cost and heuristic first.
+       heuristic: heurisitc given to solve the problem, default manhattanHeuristic
+       greedyFlag: flag to know if we use the pathcost also to sort the node on pq
+    """
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    greedyFlag = 1
+    heur = heuristic(problem.getStartState(), problem)
+    path_pq = util.PriorityQueue()  
+    path_pq.push((problem.getStartState(), None, [], 0), heuristic)
+    visited = []
+
+    while True:
+        if path_pq.isEmpty(): sys.exit('failure')
+        curr_state, curr_parent, curr_dir, curr_cost = path_pq.pop()
+        if curr_state not in visited:
+            if problem.isGoalState(curr_state): return curr_dir
+            visited.append((curr_state, curr_cost))
+
+            for state, action, cost in problem.getSuccessors(curr_state):
+                heur = heuristic(state, problem)
+                pathcost = curr_cost + cost        
+                if (state, cost) not in visited: 
+                    path_pq.push((state, curr_state, curr_dir + [action], pathcost),(greedyFlag*pathcost)+heur)
+                    visited.append((state,cost))
+                elif (state, cost) in visited and pathcost < curr_cost:
+                    path_pq.push(ns,(greedyFlag*pathcost)+heur)
+                    visited.append((state,cost))
 
 
 # Abbreviations
