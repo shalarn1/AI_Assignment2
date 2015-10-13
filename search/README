@@ -1,0 +1,278 @@
+Sarika Halarnakar and Prateek Khamesra
+AI Assignment 2 - Pacman
+15 October 2015
+
+Question 1:
+
+python pacman.py -l tinyMaze -p SearchAgent
+Our Results:
+	Macintosh:search chibb9$ python pacman.py -l tinyMaze -p SearchAgent
+	[SearchAgent] using function depthFirstSearch
+	[SearchAgent] using problem type PositionSearchProblem
+	Path found with total cost of 10 in 0.0 seconds
+	Search nodes expanded: 15
+	Pacman emerges victorious! Score: 500
+	Average Score: 500.0
+	Scores:        500.0
+	Win Rate:      1/1 (1.00)
+	Record:        Win
+
+python pacman.py -l mediumMaze -p SearchAgent
+Our Results:
+	Macintosh:search chibb9$ python pacman.py -l mediumMaze -p SearchAgent
+	[SearchAgent] using function depthFirstSearch
+	[SearchAgent] using problem type PositionSearchProblem
+	Path found with total cost of 130 in 0.0 seconds
+	Search nodes expanded: 146
+	Pacman emerges victorious! Score: 380
+	Average Score: 380.0
+	Scores:        380.0
+	Win Rate:      1/1 (1.00)
+	Record:        Win
+
+python pacman.py -l bigMaze -z .5 -p SearchAgent
+Our Results:
+	Macintosh:search chibb9$ python pacman.py -l bigMaze -z .5 -p SearchAgent
+	[SearchAgent] using function depthFirstSearch
+	[SearchAgent] using problem type PositionSearchProblem
+	Path found with total cost of 210 in 0.0 seconds
+	Search nodes expanded: 390
+	Pacman emerges victorious! Score: 300
+	Average Score: 300.0
+	Scores:        300.0
+	Win Rate:      1/1 (1.00)
+	Record:        Win
+
+python pacman.py -l openMaze -z .5 -p SearchAgent
+Our Results:
+	Macintosh:search chibb9$ python pacman.py -l openMaze -z .5 -p SearchAgent
+	[SearchAgent] using function depthFirstSearch
+	[SearchAgent] using problem type PositionSearchProblem
+	Path found with total cost of 298 in 0.1 seconds
+	Search nodes expanded: 576
+	Pacman emerges victorious! Score: 212
+	Average Score: 212.0
+	Scores:        212.0
+	Win Rate:      1/1 (1.00)
+	Record:        Win
+
+Question 2:
+
+python pacman.py -l tinyMaze -p SearchAgent -a fn=bfs
+Our Results:
+Macintosh:search chibb9$ python pacman.py -l tinyMaze -p SearchAgent -a fn=bfs
+[SearchAgent] using function bfs
+[SearchAgent] using problem type PositionSearchProblem
+Path found with total cost of 8 in 0.0 seconds
+Search nodes expanded: 15
+Pacman emerges victorious! Score: 502
+Average Score: 502.0
+Scores:        502.0
+Win Rate:      1/1 (1.00)
+Record:        Win
+
+python pacman.py -l mediumMaze -p SearchAgent -a fn=bfs
+Our Results:
+	Macintosh:search chibb9$ python pacman.py -l mediumMaze -p SearchAgent -a fn=bfs
+	[SearchAgent] using function bfs
+	[SearchAgent] using problem type PositionSearchProblem
+	Path found with total cost of 68 in 0.0 seconds
+	Search nodes expanded: 267
+	Pacman emerges victorious! Score: 442
+	Average Score: 442.0
+	Scores:        442.0
+	Win Rate:      1/1 (1.00)
+	Record:        Win
+
+python pacman.py -l bigMaze -p SearchAgent -a fn=bfs -z .5
+Our Results:
+	Macintosh:search chibb9$ python pacman.py -l bigMaze -p SearchAgent -a fn=bfs -z .5
+	[SearchAgent] using function bfs
+	[SearchAgent] using problem type PositionSearchProblem
+	Path found with total cost of 210 in 0.1 seconds
+	Search nodes expanded: 617
+	Pacman emerges victorious! Score: 300
+	Average Score: 300.0
+	Scores:        300.0
+	Win Rate:      1/1 (1.00)
+	Record:        Win
+
+python pacman.py -l openMaze -p SearchAgent -a fn=bfs -z .5
+Our Results:
+	Macintosh:search chibb9$ python pacman.py -l openMaze -p SearchAgent -a fn=bfs -z .5
+	[SearchAgent] using function bfs
+	[SearchAgent] using problem type PositionSearchProblem
+	Path found with total cost of 54 in 0.1 seconds
+	Search nodes expanded: 679
+	Pacman emerges victorious! Score: 456
+	Average Score: 456.0
+	Scores:        456.0
+	Win Rate:      1/1 (1.00)
+	Record:        Win
+
+Question 2.5 (Grad Students - Iterative Deepening Search)
+
+python pacman.py -l tinyMaze -p SearchAgent -a fn=ids
+Our Results:
+	Macintosh:search chibb9$ python pacman.py -l tinyMaze -p SearchAgent -a fn=ids
+	[SearchAgent] using function ids
+	[SearchAgent] using problem type PositionSearchProblem
+	Path found with total cost of 10 in 0.0 seconds
+	Search nodes expanded: 86
+	Pacman emerges victorious! Score: 500
+	Average Score: 500.0
+	Scores:        500.0
+	Win Rate:      1/1 (1.00)
+	Record:        Win
+
+python pacman.py -l mediumMaze -p SearchAgent -a fn=ids
+Our Results:
+	Macintosh:search chibb9$ python pacman.py -l mediumMaze -p SearchAgent -a fn=ids
+	[SearchAgent] using function ids
+	[SearchAgent] using problem type PositionSearchProblem
+	Path found with total cost of 70 in 0.2 seconds
+	Search nodes expanded: 8528
+	Pacman emerges victorious! Score: 440
+	Average Score: 440.0
+	Scores:        440.0
+	Win Rate:      1/1 (1.00)
+	Record:        Win
+
+python pacman.py -l bigMaze -p SearchAgent -a fn=ids
+Our Results:
+	Macintosh:search chibb9$ python pacman.py -l bigMaze -p SearchAgent -a fn=ids
+	[SearchAgent] using function ids
+	[SearchAgent] using problem type PositionSearchProblem
+	Path found with total cost of 210 in 2.1 seconds
+	Search nodes expanded: 60211
+	Pacman emerges victorious! Score: 300
+	Average Score: 300.0
+	Scores:        300.0
+	Win Rate:      1/1 (1.00)
+	Record:        Win
+
+
+python pacman.py -l openMaze -p SearchAgent -a fn=ids
+Our Results:
+	Macintosh:search chibb9$ python pacman.py -l openMaze -p SearchAgent -a fn=ids
+	[SearchAgent] using function ids
+	[SearchAgent] using problem type PositionSearchProblem
+	Path found with total cost of 188 in 3.0 seconds
+	Search nodes expanded: 53274
+	Pacman emerges victorious! Score: 322
+	Average Score: 322.0
+	Scores:        322.0
+	Win Rate:      1/1 (1.00)
+	Record:        Win
+
+Question 3:
+For some reason we get a key error '34' when we run the command even though it is the same code as our A* without the heuristics.
+
+Question 3.5 (Grad Students - New Cost Function):
+
+
+Question 4:
+
+python pacman.py -l tinyMaze -z .5 -p SearchAgent -a fn=astar,heuristic=manhattanHeuristic
+Our Results:
+	Macintosh:search chibb9$ python pacman.py -l tinyMaze -z .5 -p SearchAgent -a fn=astar,heuristic=manhattanHeuristic
+	[SearchAgent] using function astar and heuristic manhattanHeuristic
+	[SearchAgent] using problem type PositionSearchProblem
+	Path found with total cost of 8 in 0.0 seconds
+	Search nodes expanded: 14
+	Pacman emerges victorious! Score: 502
+	Average Score: 502.0
+	Scores:        502.0
+	Win Rate:      1/1 (1.00)
+	Record:        Win
+
+python pacman.py -l mediumMaze -z .5 -p SearchAgent -a fn=astar,heuristic=manhattanHeuristic
+Our Results:
+	Macintosh:search chibb9$ python pacman.py -l mediumMaze -z .5 -p SearchAgent -a fn=astar,heuristic=manhattanHeuristic
+	[SearchAgent] using function astar and heuristic manhattanHeuristic
+	[SearchAgent] using problem type PositionSearchProblem
+	Path found with total cost of 68 in 0.0 seconds
+	Search nodes expanded: 222
+	Pacman emerges victorious! Score: 442
+	Average Score: 442.0
+	Scores:        442.0
+	Win Rate:      1/1 (1.00)
+	Record:        Win
+
+python pacman.py -l bigMaze -z .5 -p SearchAgent -a fn=astar,heuristic=manhattanHeuristic
+Our Results:
+	Macintosh:search chibb9$ python pacman.py -l bigMaze -z .5 -p SearchAgent -a fn=astar,heuristic=manhattanHeuristic
+	[SearchAgent] using function astar and heuristic manhattanHeuristic
+	[SearchAgent] using problem type PositionSearchProblem
+	Path found with total cost of 210 in 0.1 seconds
+	Search nodes expanded: 550
+	Pacman emerges victorious! Score: 300
+	Average Score: 300.0
+	Scores:        300.0
+	Win Rate:      1/1 (1.00)
+	Record:        Win
+
+python pacman.py -l openMaze -z .5 -p SearchAgent -a fn=astar,heuristic=manhattanHeuristic
+Our Results:
+	Macintosh:search chibb9$ python pacman.py -l openMaze -z .5 -p SearchAgent -a fn=astar,heuristic=manhattanHeuristic
+	[SearchAgent] using function astar and heuristic manhattanHeuristic
+	[SearchAgent] using problem type PositionSearchProblem
+	Path found with total cost of 54 in 0.2 seconds
+	Search nodes expanded: 535
+	Pacman emerges victorious! Score: 456
+	Average Score: 456.0
+	Scores:        456.0
+	Win Rate:      1/1 (1.00)
+	Record:        Win
+
+Question 5:
+
+python pacman.py -l tinyCorners -p SearchAgent -a fn=bfs,prob=CornersProblem
+Our Results:
+	Macintosh:search chibb9$ python pacman.py -l tinyCorners -p SearchAgent -a fn=bfs,prob=CornersProblem
+	[SearchAgent] using function bfs
+	[SearchAgent] using problem type CornersProblem
+	Path found with total cost of 28 in 0.0 seconds
+	Search nodes expanded: 409
+	Pacman emerges victorious! Score: 512
+	Average Score: 512.0
+	Scores:        512.0
+	Win Rate:      1/1 (1.00)
+	Record:        Win
+
+python pacman.py -l mediumCorners -p SearchAgent -a fn=bfs,prob=CornersProblem
+Our Results:
+	Macintosh:search chibb9$ python pacman.py -l mediumCorners -p SearchAgent -a fn=bfs,prob=CornersProblem
+	[SearchAgent] using function bfs
+	[SearchAgent] using problem type CornersProblem
+	Path found with total cost of 106 in 0.5 seconds
+	Search nodes expanded: 2380
+	Pacman emerges victorious! Score: 434
+	Average Score: 434.0
+	Scores:        434.0
+	Win Rate:      1/1 (1.00)
+	Record:        Win
+
+Question 6 (Grad):
+
+python pacman.py -l tinyCorners -p AStarCornersAgent -z 0.5
+Our Results:
+	Macintosh:search chibb9$ python pacman.py -l tinyCorners -p AStarCornersAgent -z 0.5
+	Path found with total cost of 28 in 0.0 seconds
+	Search nodes expanded: 218
+	Pacman emerges victorious! Score: 512
+	Average Score: 512.0
+	Scores:        512.0
+	Win Rate:      1/1 (1.00)
+	Record:        Win
+
+python pacman.py -l mediumCorners -p AStarCornersAgent -z 0.5
+Our Results:
+	Macintosh:search chibb9$ python pacman.py -l mediumCorners -p AStarCornersAgent -z 0.5
+	Path found with total cost of 106 in 0.3 seconds
+	Search nodes expanded: 902
+	Pacman emerges victorious! Score: 434
+	Average Score: 434.0
+	Scores:        434.0
+	Win Rate:      1/1 (1.00)
+	Record:        Win

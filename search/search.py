@@ -156,7 +156,27 @@ def depthLimitedSearch(problem,limit=1000):
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+
+    path_pq = util.PriorityQueue()  
+    path_pq.push((problem.getStartState(), None, [], 0), 0)
+    visited = []
+
+    while True:
+        if path_pq.isEmpty(): sys.exit('failure')
+        curr_state, curr_parent, curr_dir, curr_cost = path_pq.pop()
+        if curr_state not in visited:
+            if problem.isGoalState(curr_state): return curr_dir
+            visited.append((curr_state, curr_cost))
+
+            for state, action, cost in problem.getSuccessors(curr_state):
+                pathcost = curr_cost + cost        
+                if (state, cost) not in visited: 
+                    path_pq.push((state, curr_state, curr_dir + [action], pathcost), problem.getCostOfActions(state))
+                    visited.append((state,cost))
+                elif (state, cost) in visited and pathcost < curr_cost:
+                    path_pq.push(ns, problem.getCostOfActions(state))
+                    visited.append((state,cost))
+
 
 def nullHeuristic(state, problem=None):
     """
@@ -198,7 +218,7 @@ def aStarSearch(problem, heuristic=manhattanHeuristic):
                     path_pq.push((state, curr_state, curr_dir + [action], pathcost),(greedyFlag*pathcost)+heur)
                     visited.append((state,cost))
                 elif (state, cost) in visited and pathcost < curr_cost:
-                    path_pq.push(ns,(greedyFlag*pathcost)+heur)
+                    path_pq.push((state, curr_state, curr_dir + [action], pathcost),(greedyFlag*pathcost)+heur)
                     visited.append((state,cost))
 
 
