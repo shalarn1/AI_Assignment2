@@ -166,7 +166,42 @@ Our Results:
 	Record:        Win
 
 Question 3:
-For some reason we get a key error '34' when we run the command even though it is the same code as our A* without the heuristics.
+
+python pacman.py -l mediumMaze -p SearchAgent -a fn=ucs
+Our Results:
+	Macintosh:search chibb9$ python pacman.py -l mediumMaze -p SearchAgent -a fn=ucs
+	[SearchAgent] using function ucs
+	[SearchAgent] using problem type PositionSearchProblem
+	Path found with total cost of 68 in 0.0 seconds
+	Search nodes expanded: 270
+	Pacman emerges victorious! Score: 442
+	Average Score: 442.0
+	Scores:        442.0
+	Win Rate:      1/1 (1.00)
+	Record:        Win
+
+python pacman.py -l mediumDottedMaze -p StayEastSearchAgent
+Our Results:
+	Macintosh:search chibb9$ python pacman.py -l mediumDottedMaze -p StayEastSearchAgent
+	Path found with total cost of 1 in 0.0 seconds
+	Search nodes expanded: 187
+	Pacman emerges victorious! Score: 646
+	Average Score: 646.0
+	Scores:        646.0
+	Win Rate:      1/1 (1.00)
+	Record:        Win
+
+python pacman.py -l mediumScaryMaze -p StayWestSearchAgent
+Our Results:
+	Macintosh:search chibb9$ python pacman.py -l mediumScaryMaze -p StayWestSearchAgent
+	Path found with total cost of 68719479864 in 0.0 seconds
+	Search nodes expanded: 108
+	Pacman emerges victorious! Score: 418
+	Average Score: 418.0
+	Scores:        418.0
+	Win Rate:      1/1 (1.00)
+	Record:        Win
+
 
 Question 3.5 (Grad Students - New Cost Function):
 
@@ -276,3 +311,52 @@ Our Results:
 	Scores:        434.0
 	Win Rate:      1/1 (1.00)
 	Record:        Win
+
+Question 7:
+
+General Search Methods Correct:
+python pacman.py -l testSearch -p AStarFoodSearchAgent
+Our Results with no change to code:
+	Macintosh:search chibb9$ python pacman.py -l testSearch -p AStarFoodSearchAgent
+	Path found with total cost of 7 in 0.0 seconds
+	Search nodes expanded: 15
+	Pacman emerges victorious! Score: 513
+	Average Score: 513.0
+	Scores:        513.0
+	Win Rate:      1/1 (1.00)
+	Record:        Win
+
+python pacman.py -l trickySearch -p AStarFoodSearchAgent
+Our Results with no change to code:
+	Macintosh:search chibb9$ python pacman.py -l trickySearch -p AStarFoodSearchAgent
+	Path found with total cost of 60 in 159.9 seconds
+	Search nodes expanded: 16689
+	Pacman emerges victorious! Score: 570
+	Average Score: 570.0
+	Scores:        570.0
+	Win Rate:      1/1 (1.00)
+	Record:        Win
+
+Question 7.5:
+
+python pacman.py -l testSearch -p AStarFoodSearchAgent
+Macintosh:search chibb9$ python pacman.py -l testSearch -p AStarFoodSearchAgent
+Path found with total cost of 7 in 0.0 seconds
+Search nodes expanded: 13
+Pacman emerges victorious! Score: 513
+Average Score: 513.0
+Scores:        513.0
+Win Rate:      1/1 (1.00)
+Record:        Win
+
+python pacman.py -l trickySearch -p AStarFoodSearchAgent
+Macintosh:search chibb9$ python pacman.py -l trickySearch -p AStarFoodSearchAgent
+Path found with total cost of 60 in 37.7 seconds
+Search nodes expanded: 9445
+Pacman emerges victorious! Score: 570
+Average Score: 570.0
+Scores:        570.0
+Win Rate:      1/1 (1.00)
+Record:        Win
+
+

@@ -171,10 +171,10 @@ def uniformCostSearch(problem):
             for state, action, cost in problem.getSuccessors(curr_state):
                 pathcost = curr_cost + cost        
                 if (state, cost) not in visited: 
-                    path_pq.push((state, curr_state, curr_dir + [action], pathcost), problem.getCostOfActions(state))
+                    path_pq.push((state, curr_state, curr_dir + [action], pathcost), pathcost)
                     visited.append((state,cost))
                 elif (state, cost) in visited and pathcost < curr_cost:
-                    path_pq.push(ns, problem.getCostOfActions(state))
+                    path_pq.push((state, curr_state, curr_dir + [action], pathcost), pathcost)
                     visited.append((state,cost))
 
 

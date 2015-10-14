@@ -485,7 +485,15 @@ def foodHeuristic(state, problem):
     """
     position, foodGrid = state
     "*** YOUR CODE HERE ***"
-    return 0
+    h = foodGrid.height
+    w = foodGrid.width
+    ct = 0
+    for x in range(w):
+        for y in range(h):
+            if foodGrid[x][y]:
+                ct = max(ct, abs(x-position[0]) + abs(y-position[1]))
+    return ct
+    #return 0
 
 class ClosestDotSearchAgent(SearchAgent):
     "Search for all food using a sequence of searches"
